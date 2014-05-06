@@ -15,5 +15,5 @@ provides 'nmddatabase::useraccess'
 recipe 'nmddatabase::useraccess', 'Gives specific users access to a database.'
 
 depends 'chef-client', '= 3.2.2'
-depends 'database', '= 2.1.8'
 depends 'mysql', '= 5.2.4'
+depends 'database', '= 2.1.8'
