@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 # Cookbook Name:: nmddatabase
-# Attributes:: default
+# Recipe:: useraccess
 #
 # Author:: Alex Knoll
 # Copyright:: 2014, NewMedia Denver
@@ -17,21 +17,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
+server = data_bag_item('nmddatabase', 'server')[node.chef_environment]
 
-### nmddatabase::default
-# No attributes.
-
-### nmddatabase::useraccess
-# No attributes. All variables come from databags
-
-### nmddatabase::mysqlserver
-# Some variables come from databags
-default[:nmddatabase][:service_name] = node[:mysql][:service_name]
-
-default[:nmddatabase][:allow_remote_root] = node[:mysql][:allow_remote_root]
-default[:nmddatabase][:remove_anonymous_users] = node[:mysql][:remove_anonymous_users]
-default[:nmddatabase][:root_network_acl] = node[:mysql][:root_network_acl]
-default[:nmddatabase][:data_dir] = node[:mysql][:data_dir]
-
-# port
-default[:nmddatabase][:port] = node[:mysql][:port]
+mysql_service node[:nmddatabase][:service_name] do
+  port node[:nmddatabase][:port]
+  data_dir node[:nmddatabase][:data_dir]
+  allow_remote_root node[:nmddatabase][:allow_remote_root]
+  root_network_acl node[:nmddatabase][:root_network_acl]
+  remove_anonymous_users node[:nmddatabase][:remove_anonymous_users]
+  server_root_password server[:server_root_password]
+  server_debian_password server[:server_debian_password]
+  server_repl_password server[:server_repl_password]
+  action :create
+end
