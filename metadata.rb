@@ -1,6 +1,6 @@
 # encoding: utf-8
 name 'nmddatabase'
-maintainer 'NewMedia! Denver'
+maintainer 'newmedia Denver'
 maintainer_email 'support@newmediadenver.com'
 license 'Apache 2.0'
 
