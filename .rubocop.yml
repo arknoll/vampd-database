@@ -1,0 +1,10 @@
+AllCops:
+  Include:
+    - Berksfile
+    - Gemfile
+    - Rakefile
+HashSyntax:
+  Enabled: false
+LineLength:
+  Enabled: true
+  Max: 120
