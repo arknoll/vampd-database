@@ -6,14 +6,18 @@ provisioner:
   name: chef_solo
 
 platforms:
-  - name: ubuntu-12.04
+  - name: ubuntu-14.04
     driver_config:
-      box: ubuntu-12.04
+      box: ubuntu-14.04
       # box_url: https://nmd-virtualbox.s3-us-west-2.amazonaws.com/nmd-ubunutu-12.04-i386-base-latest.box
-      box_url: https://nmd-vmware.s3-us-west-2.amazonaws.com/nmd-ubunutu-12.04-i386-base-latest.box
+      box_url: https://s3-us-west-2.amazonaws.com/nmd-virtualbox/nmd-ubunutu-14.04-x86_64-base.box
 suites:
   - name: default
     run_list:
       - recipe[nmddatabase::default]
     data_bags_path: "<%= ENV['DATA_BAGS_PATH'] %>"
     attributes:
+suites:
+  - name: mysqlserver
+    run_list:
+      - recipe[nmddatabase::mysqlserver]

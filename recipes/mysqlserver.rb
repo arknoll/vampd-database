@@ -20,14 +20,18 @@
 #
 server = data_bag_item('nmddatabase', 'server')[node.chef_environment]
 
+node.set['mysql']['server_root_password'] = server['server_root_password']
+node.set['mysql']['server_debian_password'] = server['server_debian_password']
+node.set['mysql']['server_repl_password'] = server['server_repl_password']
+
 mysql_service node[:nmddatabase][:service_name] do
   port node[:nmddatabase][:port]
   data_dir node[:nmddatabase][:data_dir]
   allow_remote_root node[:nmddatabase][:allow_remote_root]
   root_network_acl node[:nmddatabase][:root_network_acl]
   remove_anonymous_users node[:nmddatabase][:remove_anonymous_users]
-  server_root_password server[:server_root_password]
-  server_debian_password server[:server_debian_password]
-  server_repl_password server[:server_repl_password]
+  server_root_password server['server_root_password']
+  server_debian_password server['server_debian_password']
+  server_repl_password server['server_repl_password']
   action :create
 end
