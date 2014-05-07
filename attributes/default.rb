@@ -35,3 +35,6 @@ default[:nmddatabase][:data_dir] = node[:mysql][:data_dir]
 
 # port
 default[:nmddatabase][:port] = node[:mysql][:port]
+
+# databases to create
+default[:nmddatabase][:databases] = {}

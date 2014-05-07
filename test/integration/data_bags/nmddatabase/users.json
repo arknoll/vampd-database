@@ -4,7 +4,7 @@
     "grant_hosts": {
       "localhost": {
         "maintenance_user": "root",
-        "maintenance_password": "root",
+        "maintenance_password": "test1",
         "type": "mysql",
         "databases": {
           "example": {
@@ -12,16 +12,16 @@
               "drupal": {
                 "password": "drupal",
                 "privileges": [
-                  ":select",
-                  ":insert",
-                  ":update",
-                  ":delete",
-                  ":create",
-                  ":drop",
-                  ":index",
-                  ":alter",
-                  ":'lock tables'",
-                  ":'create temporary tables'"
+                  "select",
+                  "insert",
+                  "update",
+                  "delete",
+                  "create",
+                  "drop",
+                  "index",
+                  "alter",
+                  "lock tables",
+                  "create temporary tables"
                 ]
               }
             }

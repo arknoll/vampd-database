@@ -22,25 +22,17 @@ include_recipe 'mysql::client'
 include_recipe 'database'
 include_recipe 'database::mysql'
 
-mysql_users = data_bag_item('nmddatabase', 'users')[node.chef_environment]
+server = data_bag_item('nmddatabase', 'server')[node.chef_environment]
 
-mysql_users['grant_hosts'].each do |host_name, host|
+node[:nmddatabase][:databases].each do |database_name|
   mysql_connection_info = {
-    :host     => host_name,
-    :username => host['maintenance_user'],
-    :password => host['maintenance_password']
+    :host     => 'localhost',
+    :username => 'root',
+    :password => server['server_root_password']
   }
-  host['databases'].each do |db_name, database|
-    database['users'].each do |user_name, user|
-      Chef::Log.debug "nmddatabase::useraccess: - grant access to user #{user_name} on #{host_name}"
-      mysql_database_user user_name do
-        connection mysql_connection_info
-        password user['password']
-        database_name db_name
-        host host_name
-        privileges user['privileges']
-        action [:grant]
-      end
-    end
+
+  mysql_database database_name do
+    connection mysql_connection_info
+    action [:create]
   end
 end
